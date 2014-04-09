@@ -14,6 +14,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     develop.vm.network :private_network, ip: "192.168.33.10"
 
     develop.vm.provision :chef_solo do |chef|
+      chef.log_level = "debug"
       chef.cookbooks_path = "./cookbooks"
       chef.json = {
         nginx: {

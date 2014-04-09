@@ -24,6 +24,7 @@ template "/etc/nginx/sites-available/default" do
   group "root"
   mode 0644
   action :create
+  notifies :restart, "service[nginx]"
 end
 
 directory "/usr/share/nginx/html" do
@@ -43,4 +44,16 @@ end
 
 service "nginx" do
   action [:enable, :start]
+end
+
+service "mysql" do
+  action [:enable, :restart]
+  supports :status => true, :start => true, :stop => true, :restart => true
+  not_if do File.exists?("/var/run/mysql.pid") end
+end
+
+execute "set_mysql_root_password" do
+  command "/usr/bin/mysqladmin -u root password \"#{node['mysql']['root_password']}\""
+  action :run
+  only_if "/usr/bin/mysql -u root -e 'show databases;'"
 end

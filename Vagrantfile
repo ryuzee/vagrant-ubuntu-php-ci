@@ -30,6 +30,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         recipe[base::phpmd]
         recipe[base::phing]
         recipe[base::php_codesniffer]
+        recipe[base::php_documentor]
         recipe[base::capistrano]
       ]
     end

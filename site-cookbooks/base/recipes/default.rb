@@ -49,7 +49,7 @@ end
 service "mysql" do
   action [:enable, :restart]
   supports :status => true, :start => true, :stop => true, :restart => true
-  not_if do File.exists?("/var/run/mysql.pid") end
+  not_if do File.exists?("/var/run/mysqld/mysqld.pid") end
 end
 
 execute "set_mysql_root_password" do

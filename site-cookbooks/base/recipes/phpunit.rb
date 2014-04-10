@@ -16,3 +16,7 @@ remote_file "/usr/local/bin/phpunit" do
   group "root"
   mode 0755
 end
+
+package "php5-xdebug" do
+  action :install
+end

@@ -27,6 +27,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         recipe[base]
         recipe[base::phpunit]
         recipe[base::phpcpd]
+        recipe[base::phpmd]
         recipe[base::capistrano]
       ]
     end

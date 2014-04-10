@@ -24,6 +24,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         }
       }
       chef.run_list = %w[
+        recipe[apt]
         recipe[base]
         recipe[base::phpunit]
         recipe[base::phpcpd]

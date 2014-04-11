@@ -13,10 +13,8 @@ remote_file "/var/lib/jenkins/jenkins-cli.jar" do
   retry_delay 10
 end
 
-cmd = <<"EOS"
-  wget -O default.js http://updates.jenkins-ci.org/update-center.json && sed '1d;$d' default.js > default.json && curl -X POST -H "Accept: application/json" -d @default.json http://localhost:8080/updateCenter/byId/default/postBack
-EOS
-execute cmd do
+execute 'get-update-json'  do
+  command "curl -L http://updates.jenkins-ci.org/update-center.json | sed '1d;$d' | curl -X POST -H 'Accept: application/json' -d @- http://localhost:8080/updateCenter/byId/default/postBack"
   action :run
 end
 

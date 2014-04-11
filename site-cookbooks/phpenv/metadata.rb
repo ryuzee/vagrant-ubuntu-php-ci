@@ -1,4 +1,4 @@
-name             'base'
+name             'phpenv'
 maintainer       'Ryutaro YOSHIBA'
 maintainer_email 'ryuzee_at_gmail.com'
 license          'MIT License'

@@ -1,12 +1,16 @@
 #
-# Cookbook Name:: base
-# Recipe:: php_codesniffer
+# Cookbook Name:: phpenv
+# Recipe:: capistrano
 #
 # Copyright 2014, Ryutaro YOSHIBA
 #
 # This software is released under the MIT License.
 # http://opensource.org/licenses/mit-license.php
 
-execute "pear upgrade --alldeps PHP_CodeSniffer" do
-  action :run
+package "ruby2.0" do
+  action :install
+end
+
+gem_package "capistrano" do
+  action :install
 end

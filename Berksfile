@@ -1,5 +1,5 @@
 site :opscode
 
-cookbook "base", path: "./site-cookbooks/base"
+cookbook "phpenv", path: "./site-cookbooks/phpenv"
 cookbook "jenkins", path: "./site-cookbooks/jenkins"
 cookbook "apt"

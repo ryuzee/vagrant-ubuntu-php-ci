@@ -1,5 +1,5 @@
 #
-# Cookbook Name:: base
+# Cookbook Name:: phpenv
 # Recipe:: default
 #
 # Copyright 2014, Ryutaro YOSHIBA

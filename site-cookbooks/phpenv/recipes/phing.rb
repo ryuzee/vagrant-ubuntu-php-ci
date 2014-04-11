@@ -1,5 +1,5 @@
 #
-# Cookbook Name:: base
+# Cookbook Name:: phpenv
 # Recipe:: phing 
 #
 # Copyright 2014, Ryutaro YOSHIBA

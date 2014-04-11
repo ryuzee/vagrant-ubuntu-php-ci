@@ -44,6 +44,31 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     ci.vm.box = "opscode-ubuntu-14.04"
     ci.vm.box_url = "http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_ubuntu-14.04_chef-provisionerless.box"
     ci.vm.network :private_network, ip: "192.168.33.100"
+
+    ci.vm.provision :chef_solo do |chef|
+      chef.log_level = "debug"
+      chef.cookbooks_path = "./cookbooks"
+      chef.json = {
+        nginx: {
+          docroot: {
+            owner: "vagrant", group: "vagrant"
+          }
+        }
+      }
+      chef.run_list = %w[
+        recipe[apt]
+        recipe[base]
+        recipe[base::phpunit]
+        recipe[base::phpcpd]
+        recipe[base::phpmd]
+        recipe[base::phing]
+        recipe[base::php_codesniffer]
+        recipe[base::php_documentor]
+        recipe[base::capistrano]
+        recipe[jenkins]
+        recipe[jenkins::plugin]
+      ]
+    end
   end
 
   # 3つめの仮想マシン

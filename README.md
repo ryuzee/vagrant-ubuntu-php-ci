@@ -26,4 +26,8 @@ vagrant@develop:~$ phpdoc --version
 phpDocumentor version 2.4.0
 
 
+vagrant@develop:~$ phing -v
+Phing 2.7.0
+
+
 </pre>

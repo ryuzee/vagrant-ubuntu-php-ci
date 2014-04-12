@@ -12,6 +12,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     develop.vm.box = "opscode-ubuntu-14.04"
     develop.vm.box_url = "http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_ubuntu-14.04_chef-provisionerless.box"
     develop.vm.network :private_network, ip: "192.168.33.10"
+    # develop.vm.synced_folder "sample_app", "/opt/sample_app"
 
     develop.vm.provision :chef_solo do |chef|
       chef.log_level = "debug"

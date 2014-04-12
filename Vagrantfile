@@ -32,7 +32,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         recipe[phpenv::phing]
         recipe[phpenv::php_codesniffer]
         recipe[phpenv::php_documentor]
-        recipe[phpenv::capistrano]
+        recipe[rubyenv]
+        recipe[capistrano]
       ]
     end
   end
@@ -64,7 +65,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         recipe[phpenv::phing]
         recipe[phpenv::php_codesniffer]
         recipe[phpenv::php_documentor]
-        recipe[phpenv::capistrano]
+        recipe[rubyenv]
+        recipe[capistrano]
         recipe[jenkins]
         recipe[jenkins::plugin]
       ]

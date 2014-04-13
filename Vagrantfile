@@ -5,6 +5,10 @@
 VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  if Vagrant.has_plugin?("vagrant-cachier")
+    config.cache.scope = :box
+  end
+
   # 1つめの仮想マシン
   config.vm.define :develop do |develop|
     develop.omnibus.chef_version = :latest
@@ -20,7 +24,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       chef.json = {
         nginx: {
           docroot: {
-            owner: "vagrant", group: "vagrant", path: "/var/www/sample_app"
+            owner: "vagrant", group: "vagrant", path: "/var/www/sample_app/current/app/webroot"
           }
         }
       }
@@ -81,5 +85,20 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     deploy.vm.box = "opscode-ubuntu-14.04"
     deploy.vm.box_url = "http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_ubuntu-14.04_chef-provisionerless.box"
     deploy.vm.network :private_network, ip: "192.168.33.200"
+    deploy.vm.provision :chef_solo do |chef|
+      chef.log_level = "debug"
+      chef.cookbooks_path = "./cookbooks"
+      chef.json = {
+        nginx: {
+          docroot: {
+            owner: "vagrant", group: "vagrant", path: "/var/www/sample_app/current/app/webroot"
+          }
+        }
+      }
+      chef.run_list = %w[
+        recipe[apt]
+        recipe[phpenv]
+      ]
+    end
   end
 end

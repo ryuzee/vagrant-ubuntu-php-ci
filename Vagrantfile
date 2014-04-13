@@ -20,7 +20,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       chef.json = {
         nginx: {
           docroot: {
-            owner: "vagrant", group: "vagrant"
+            owner: "vagrant", group: "vagrant", path: "/var/www/sample_app"
           }
         }
       }

@@ -9,12 +9,24 @@
 
 # you can see the instruction as follows.
 # http://phpunit.de/manual/4.0/en/installation.html
-remote_file "/usr/local/bin/phpunit" do
-  source "https://phar.phpunit.de/phpunit.phar"
-  action :create_if_missing
-  owner "root"
-  group "root"
-  mode 0755
+
+if node['php_library']['install_method'] == "pear" then
+  execute "pear channel-discover pear.phpunit.de" do
+    action :run
+    not_if "pear list-channels | grep pear.phpunit.de"
+  end
+
+  execute "pear upgrade --alldeps phpunit/phpunit" do
+    action :run
+  end
+elsif node['php_library']['install_method'] == "phar" then
+  remote_file "/usr/local/bin/phpunit" do
+    source "https://phar.phpunit.de/phpunit.phar"
+    action :create_if_missing
+    owner "root"
+    group "root"
+    mode 0755
+  end
 end
 
 package "php5-xdebug" do

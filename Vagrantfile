@@ -16,6 +16,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     develop.vm.box = "opscode-ubuntu-14.04"
     develop.vm.box_url = "http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_ubuntu-14.04_chef-provisionerless.box"
     develop.vm.network :private_network, ip: "192.168.33.10"
+    # Vagrantfileがあるディレクトリと同じディレクトリのapplicationディレクトリをVagrantと共有
+    # このディレクトリを下記でNginxのドキュメントルートに指定
     develop.vm.synced_folder "application", "/var/www/application/current"
 
     develop.vm.provision :chef_solo do |chef|
@@ -91,7 +93,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       chef.json = {
         nginx: {
           docroot: {
-            owner: "vagrant", group: "vagrant", path: "/var/www/sample_app/current/app/webroot"
+            owner: "vagrant", group: "vagrant", path: "/var/www/application/current/app/webroot"
           }
         }
       }

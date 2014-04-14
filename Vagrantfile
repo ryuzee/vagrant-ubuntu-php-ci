@@ -16,7 +16,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     develop.vm.box = "opscode-ubuntu-14.04"
     develop.vm.box_url = "http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_ubuntu-14.04_chef-provisionerless.box"
     develop.vm.network :private_network, ip: "192.168.33.10"
-    # develop.vm.synced_folder "sample_app", "/opt/sample_app"
+    develop.vm.synced_folder "application", "/var/www/application/current"
 
     develop.vm.provision :chef_solo do |chef|
       chef.log_level = "debug"
@@ -24,7 +24,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       chef.json = {
         nginx: {
           docroot: {
-            owner: "vagrant", group: "vagrant", path: "/var/www/sample_app/current/app/webroot"
+            owner: "vagrant", group: "vagrant", path: "/var/www/application/current/app/webroot"
           }
         }
       }

@@ -3,6 +3,20 @@ vagrant-ubuntu-php-ci
 
 ## 使い方
 
+## アプリケーションの配置
+
+### 開発環境
+
+ローカルのディレクトリをVagrantの共有ディレクトリ機能を使って共有する。
+
+カレントディレクトリで
+
+```
+git clone [アプリケーションレポジトリ] application 
+```
+
+のような形でcloneする。なお、application/app/webroot をドキュメントルートにしているので、CakePHP以外の場合は、application/app/webrootディレクトリを作成した上でその中に適当なPHPスクリプトを配置する。
+
 ### Vagrantのプラグインのインストール（推奨）
 
 何度も環境を作り直すことになるので、aptのパッケージをキャッシュすることが望ましい。以下のようにしてインストールする。
@@ -41,19 +55,7 @@ vagrant up --provision develop
 
 それぞれの環境に何が入っているかは、Vagrantfileを参照
 
-## アプリケーションの配置
 
-### 開発環境
-
-ローカルのディレクトリをVagrantの共有ディレクトリ機能を使って共有する。
-
-カレントディレクトリで
-
-```
-git clone [アプリケーションレポジトリ] application 
-```
-
-のような形でcloneする。なお、application/app/webroot をドキュメントルートにしているので、CakePHP以外の場合は、application/app/webrootディレクトリを作成した上でその中に適当なPHPスクリプトを配置する。
 
 ## バージョン情報
 

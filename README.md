@@ -17,6 +17,20 @@ git clone [アプリケーションレポジトリ] application
 
 のような形でcloneする。なお、application/app/webroot をドキュメントルートにしているので、CakePHP以外の場合は、application/app/webrootディレクトリを作成した上でその中に適当なPHPスクリプトを配置する。
 
+## Berkshelfなどの準備
+
+Cookbookを実行するために、Berkshelfなどが必要なのでインストールする。
+
+```
+bundle install
+```
+
+終わったら、Cookbookをインストールする
+
+```
+berks install --path cookbooks
+```
+
 ### Vagrantのプラグインのインストール（推奨）
 
 何度も環境を作り直すことになるので、aptのパッケージをキャッシュすることが望ましい。以下のようにしてインストールする。

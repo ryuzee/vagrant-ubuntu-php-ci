@@ -31,7 +31,7 @@ bundle install
 berks install --path cookbooks
 ```
 
-### Vagrantのプラグインのインストール（推奨）
+## Vagrantのプラグインのインストール（推奨）
 
 何度も環境を作り直すことになるので、aptのパッケージをキャッシュすることが望ましい。以下のようにしてインストールする。
 
@@ -41,7 +41,7 @@ vagrant plugin install vagrant-cachier
 
 なお、本機能はVagrant1.4以降でしか動作しない。現在1.5.2が最新なので、最新版のVagrantを使う。
 
-### boxの追加
+## boxの追加
 
 将来的なことを考えてVagrantfile上のbox_urlは現時点では存在しないものを指定しているため、以下必須
 

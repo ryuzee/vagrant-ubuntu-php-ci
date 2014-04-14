@@ -129,3 +129,16 @@ vagrant@develop:~$ phing -v
 Phing 2.7.0
 ```
 
+## Jenkinsで導入しているプラグイン
+
+* checkstyle 
+* cloverphp 
+* dry 
+* htmlpublisher 
+* jdepend 
+* plot 
+* pmd 
+* violations 
+* xunit 
+* phing 
+* Locale

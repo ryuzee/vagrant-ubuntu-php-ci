@@ -3,7 +3,19 @@ vagrant-ubuntu-php-ci
 
 ## 使い方
 
-まずはboxを追加する。将来的なことを考えてVagrantfile上のbox_urlは現時点では存在しないものを指定しているため、以下必須
+### Vagrantのプラグインのインストール（推奨）
+
+何度も環境を作り直すことになるので、aptのパッケージをキャッシュすることが望ましい。以下のようにしてインストールする。
+
+```
+vagrant plugin install vagrant-cachier
+```
+
+なお、本機能はVagrant1.4以降でしか動作しない。現在1.5.2が最新なので、最新版のVagrantを使う。
+
+### boxの追加
+
+将来的なことを考えてVagrantfile上のbox_urlは現時点では存在しないものを指定しているため、以下必須
 
 ```
 vagrant box add opscode-ubuntu-14.04 https://dl.dropboxusercontent.com/u/428597/vagrant_boxes/opscode_ubuntu-14.04_chef-provisionerless.box

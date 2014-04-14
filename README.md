@@ -17,6 +17,14 @@ git clone [アプリケーションレポジトリ] application
 
 のような形でcloneする。なお、application/app/webroot をドキュメントルートにしているので、CakePHP以外の場合は、application/app/webrootディレクトリを作成した上でその中に適当なPHPスクリプトを配置する。
 
+単純なphpinfoを表示するのであれば、カレントディレクトリで、
+
+```
+sh ./local_env.sh
+```
+
+と実行すれば最低限必要なディレクトリとテスト用スクリプトを作成します。
+
 ## Berkshelfなどの準備
 
 Cookbookを実行するために、Berkshelfなどが必要なのでインストールする。

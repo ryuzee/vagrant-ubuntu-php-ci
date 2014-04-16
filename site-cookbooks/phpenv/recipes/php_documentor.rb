@@ -7,10 +7,6 @@
 # This software is released under the MIT License.
 # http://opensource.org/licenses/mit-license.php
 
-package "php5-xsl" do
-  action :install
-end
-
 if node['php_library']['install_method'] == "pear" then
   execute "pear channel-discover pear.phpdoc.org" do
     action :run

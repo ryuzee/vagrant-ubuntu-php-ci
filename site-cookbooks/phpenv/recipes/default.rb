@@ -7,7 +7,8 @@
 # This software is released under the MIT License.
 # http://opensource.org/licenses/mit-license.php
 
-%w{php5 php5-cli php5-fpm php5-mysql php-pear php5-xsl mysql-server-5.5 nginx git}.each do |p|
+# installing php mysql and related or useful php extension
+%w{php5 php5-cli php5-fpm php5-mysql php-pear php5-curl php5-xsl mysql-server-5.5 nginx git}.each do |p|
   package p do
     action :install
   end

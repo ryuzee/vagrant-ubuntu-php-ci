@@ -39,7 +39,17 @@ bundle install
 berks install --path cookbooks
 ```
 
-## Vagrantのプラグインのインストール（推奨）
+## Vagrantのプラグインのインストール
+
+### 必須
+
+Bentoプロジェクトによって提供されているBoxにはChef Clientは含まれていないため、自動でインストールするように、vagrant-omnibusプラグインを利用する。
+
+```
+vagrant plugin install vagrant-omnibus
+```
+
+### 推奨
 
 何度も環境を作り直すことになるので、aptのパッケージをキャッシュすることが望ましい。以下のようにしてインストールする。
 
@@ -51,10 +61,10 @@ vagrant plugin install vagrant-cachier
 
 ## boxの追加
 
-将来的なことを考えてVagrantfile上のbox_urlは現時点では存在しないものを指定しているため、以下必須
+Vagrantを起動すれば、Boxがない場合は自動で取得してくれるようになっているが、自分で手動でBoxを追加することも可能。
 
 ```
-vagrant box add opscode-ubuntu-14.04 https://dl.dropboxusercontent.com/u/428597/vagrant_boxes/opscode_ubuntu-14.04_chef-provisionerless.box
+vagrant box add opscode-ubuntu-14.04 http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_ubuntu-14.04_chef-provisionerless.box
 ```
 
 次に仮想マシンを起動する。仮想マシンは全部で3台ある。

@@ -36,7 +36,19 @@ bundle install
 終わったら、Cookbookをインストールする
 
 ```
-berks install --path cookbooks
+bundle exec berks vendor cookbooks
+```
+
+なお、以下のようなエラーが表示されることがあります。
+
+```
+/Users/ryuzee/.rvm/rubies/ruby-2.0.0-p247/lib/ruby/2.0.0/net/http.rb:918:in `connect': SSL_connect returned=1 errno=0 state=SSLv3 read server certificate B: certificate verify failed (Faraday::SSLError)
+```
+
+この場合は、端末にインストールされている証明書に問題がある可能性があるので、OS Xでrvmを使っている場合は、以下のように証明書を更新してください。
+
+```
+sudo rvm osx-ssl-certs update all
 ```
 
 ## Vagrantのプラグインのインストール

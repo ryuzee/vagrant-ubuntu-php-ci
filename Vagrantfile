@@ -18,7 +18,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     develop.vm.network :private_network, ip: "192.168.33.10"
     # Vagrantfileがあるディレクトリと同じディレクトリのapplicationディレクトリをVagrantと共有
     # このディレクトリを下記でNginxのドキュメントルートに指定
-    develop.vm.synced_folder "application", "/var/www/application/current"
+    develop.vm.synced_folder "application", "/var/www/application/current",
+      id: "vagrant-root", :nfs => false,
+      :owner => "vagrant",
+      :group => "www-data",
+      :mount_options => ["dmode=775,fmode=664"]
 
     develop.vm.provision :chef_solo do |chef|
       chef.log_level = "debug"

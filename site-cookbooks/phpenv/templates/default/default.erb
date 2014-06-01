@@ -38,6 +38,9 @@ server {
 		fastcgi_index   index.php;
 		fastcgi_intercept_errors on;
 		fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+<% node['nginx']['fastcgi_params'].each do |key,value| -%>
+		fastcgi_param <%= key %> <%= value %>;
+<% end %>
 	}
 
 	# Only for nginx-naxsi used with nginx-naxsi-ui : process denied requests

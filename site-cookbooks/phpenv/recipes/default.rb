@@ -24,6 +24,14 @@ service "apache2" do
   only_if "dpkg -l | grep apache2"
 end
 
+template "/etc/nginx/sites-available/#{node['nginx']['site']['template']}" do
+  source "#{node['nginx']['site']['template']}.erb"
+  owner "root"
+  group "root"
+  mode 0644
+  action :create
+end
+
 template "/etc/nginx/sites-available/default" do
   source "default.erb"
   owner "root"

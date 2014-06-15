@@ -21,7 +21,7 @@ if node['php_library']['install_method'] == "pear" then
   end
 elsif node['php_library']['install_method'] == "phar" then
   remote_file "/usr/local/bin/phpunit" do
-    source "https://phar.phpunit.de/phpunit.phar"
+    source "https://phar.phpunit.de/phpunit-3.7.37.phar"
     action :create_if_missing
     owner "root"
     group "root"

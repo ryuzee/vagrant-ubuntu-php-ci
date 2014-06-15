@@ -8,10 +8,15 @@
 # http://opensource.org/licenses/mit-license.php
 
 # installing php mysql and related or useful php extension
-%w{php5 php5-cli php5-fpm php5-mysql php-pear php5-curl php5-xsl mysql-server-5.5 nginx git}.each do |p|
+%w{php5 php5-cli php5-fpm php5-mysql php-pear php5-curl php5-xsl php5-mcrypt mysql-server-5.5 nginx git}.each do |p|
   package p do
     action :install
   end
+end
+
+# enable mcrypt module
+execute "php5enmod mcrypt" do
+  action :run
 end
 
 service "apache2" do
@@ -58,3 +63,5 @@ execute "set_mysql_root_password" do
   action :run
   only_if "/usr/bin/mysql -u root -e 'show databases;'"
 end
+
+# vim: filetype=ruby.chef

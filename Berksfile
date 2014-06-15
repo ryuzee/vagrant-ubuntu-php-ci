@@ -1,4 +1,4 @@
-site :opscode
+source "http://api.berkshelf.com"
 
 cookbook "phpenv", path: "./site-cookbooks/phpenv"
 cookbook "jenkins", path: "./site-cookbooks/jenkins"

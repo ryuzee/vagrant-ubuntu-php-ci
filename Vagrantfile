@@ -35,6 +35,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
           },
           fastcgi_params: {
             CAKE_ENV: "development"
+          },
+          site: {
+            template: "development"
           }
         }
       }
@@ -69,6 +72,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         nginx: {
           docroot: {
             owner: "vagrant", group: "vagrant"
+          },
+          fastcgi_params: {
+            CAKE_ENV: "ci"
+          },
+          site: {
+            template: "ci"
           }
         }
       }
@@ -105,6 +114,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         nginx: {
           docroot: {
             owner: "vagrant", group: "vagrant", path: "/var/www/application/current/app/webroot"
+          },
+          fastcgi_params: {
+            CAKE_ENV: "production"
+          },
+          site: {
+            template: "production"
           }
         }
       }

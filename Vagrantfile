@@ -16,6 +16,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     develop.vm.box = "opscode-ubuntu-14.04"
     develop.vm.box_url = "http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_ubuntu-14.04_chef-provisionerless.box"
     develop.vm.network :private_network, ip: "192.168.33.10"
+    develop.vm.network "forwarded_port", guest: 80, host: 8880 
     # Vagrantfileがあるディレクトリと同じディレクトリのapplicationディレクトリをVagrantと共有
     # このディレクトリを下記でNginxのドキュメントルートに指定
     develop.vm.synced_folder "application", "/var/www/application/current",
@@ -62,6 +63,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     ci.vm.box = "opscode-ubuntu-14.04"
     ci.vm.box_url = "http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_ubuntu-14.04_chef-provisionerless.box"
     ci.vm.network :private_network, ip: "192.168.33.100"
+    ci.vm.network "forwarded_port", guest: 80, host: 8881 
 
     ci.vm.provision :chef_solo do |chef|
       chef.log_level = "debug"
@@ -103,6 +105,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     deploy.vm.box = "opscode-ubuntu-14.04"
     deploy.vm.box_url = "http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_ubuntu-14.04_chef-provisionerless.box"
     deploy.vm.network :private_network, ip: "192.168.33.200"
+    deploy.vm.network "forwarded_port", guest: 80, host: 8882 
+
     deploy.vm.provision :chef_solo do |chef|
       chef.log_level = "debug"
       chef.cookbooks_path = "./cookbooks"

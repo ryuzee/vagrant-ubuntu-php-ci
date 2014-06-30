@@ -23,7 +23,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       id: "vagrant-root", :nfs => false,
       :owner => "vagrant",
       :group => "www-data",
-      :mount_options => ["dmode=775,fmode=664"]
+      :mount_options => ["dmode=775,fmode=775"]
 
     develop.vm.provision :chef_solo do |chef|
       chef.log_level = "debug"
@@ -93,7 +93,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         recipe[rubyenv]
         recipe[capistrano]
         recipe[jenkins]
-        recipe[jenkins::plugin]
       ]
     end
   end

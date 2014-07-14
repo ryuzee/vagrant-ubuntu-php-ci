@@ -50,19 +50,21 @@ template "/etc/nginx/sites-available/default" do
   notifies :restart, "service[nginx]"
 end
 
-directory "/usr/share/nginx/html" do
+directory node['nginx']['docroot']['path'] do
   owner node['nginx']['docroot']['owner'] 
   group node['nginx']['docroot']['group'] 
   mode 0755
   action :create
+  not_if { File.exists?(node['nginx']['docroot']['path']) }
 end
 
-template "/usr/share/nginx/html/index.php" do
+template "#{node['nginx']['docroot']['path']}/index.php" do
   source "index.php.erb"
   owner node['nginx']['docroot']['owner'] 
   group node['nginx']['docroot']['group'] 
   mode 0644
   action :create
+  not_if { File.exists?("#{node['nginx']['docroot']['path']}/index.php") }
 end
 
 service "nginx" do

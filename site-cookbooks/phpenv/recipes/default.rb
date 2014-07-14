@@ -55,6 +55,7 @@ directory node['nginx']['docroot']['path'] do
   group node['nginx']['docroot']['group'] 
   mode 0755
   action :create
+  recursive true
   not_if { File.exists?(node['nginx']['docroot']['path']) }
 end
 

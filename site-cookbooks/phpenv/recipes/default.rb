@@ -47,7 +47,6 @@ template "/etc/nginx/sites-available/default" do
   group "root"
   mode 0644
   action :create
-  notifies :restart, "service[nginx]"
 end
 
 directory node['nginx']['docroot']['path'] do
@@ -69,7 +68,7 @@ template "#{node['nginx']['docroot']['path']}/index.php" do
 end
 
 service "nginx" do
-  action [:enable, :start]
+  action [:enable, :restart]
 end
 
 service "mysql" do

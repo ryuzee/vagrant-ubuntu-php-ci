@@ -43,9 +43,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       }
       chef.run_list = %w[
         recipe[apt]
-        recipe[phpenv]
+        recipe[phpenv::default]
         recipe[phpenv::composer]
-        recipe[rubyenv]
         recipe[capistrano]
       ]
     end
@@ -78,9 +77,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       }
       chef.run_list = %w[
         recipe[apt]
-        recipe[phpenv]
+        recipe[phpenv::default]
         recipe[phpenv::composer]
-        recipe[rubyenv]
         recipe[capistrano]
         recipe[jenkins]
       ]
@@ -114,7 +112,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       }
       chef.run_list = %w[
         recipe[apt]
-        recipe[phpenv]
+        recipe[phpenv::default]
         recipe[phpenv::composer]
       ]
     end

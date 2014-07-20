@@ -64,7 +64,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       chef.json = {
         nginx: {
           docroot: {
-            owner: "jenkins", group: "jenkins", path: "/var/lib/jenkins/jobs/blogapp/workspace/app/webroot"
+            owner: "vagrant", group: "vagrant", path: "/var/lib/jenkins/jobs/blogapp/workspace/app/webroot"
           },
           fastcgi_params: {
             CAKE_ENV: "ci"

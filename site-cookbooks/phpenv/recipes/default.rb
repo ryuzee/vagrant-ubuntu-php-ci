@@ -55,7 +55,7 @@ directory node['nginx']['docroot']['path'] do
   mode 0755
   action :create
   recursive true
-  not_if { File.exists?(node['nginx']['docroot']['path']) }
+  only_if { not File.exists?(node['nginx']['docroot']['path']) and node['nginx']['docroot']['force_create']}
 end
 
 template "#{node['nginx']['docroot']['path']}/index.php" do
@@ -64,7 +64,7 @@ template "#{node['nginx']['docroot']['path']}/index.php" do
   group node['nginx']['docroot']['group'] 
   mode 0644
   action :create
-  not_if { File.exists?("#{node['nginx']['docroot']['path']}/index.php") }
+  only_if { not File.exists?("#{node['nginx']['docroot']['path']}/index.php") and node['nginx']['docroot']['force_create']}
 end
 
 service "nginx" do

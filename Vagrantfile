@@ -31,7 +31,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       chef.json = {
         nginx: {
           docroot: {
-            owner: "vagrant", group: "vagrant", path: "/var/www/application/current/app/webroot"
+            owner: "vagrant", 
+            group: "vagrant", 
+            path: "/var/www/application/current/app/webroot",
+            force_create: true
           },
           fastcgi_params: {
             CAKE_ENV: "development"
@@ -45,6 +48,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         recipe[apt]
         recipe[phpenv::default]
         recipe[phpenv::composer]
+        recipe[phpenv::xdebug]
         recipe[capistrano]
       ]
     end
@@ -64,7 +68,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       chef.json = {
         nginx: {
           docroot: {
-            owner: "vagrant", group: "vagrant", path: "/var/lib/jenkins/jobs/blogapp/workspace/app/webroot"
+            owner: "jenkins", 
+            group: "jenkins", 
+            path: "/var/lib/jenkins/jobs/blogapp/workspace/app/webroot",
+            force_create: false
           },
           fastcgi_params: {
             CAKE_ENV: "ci"
@@ -78,9 +85,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         recipe[apt]
         recipe[phpenv::default]
         recipe[phpenv::composer]
-        recipe[capistrano]
+        recipe[phpenv::xdebug]
         recipe[jenkins::default]
         recipe[jenkins::plugin]
+        recipe[capistrano]
       ]
     end
   end
@@ -100,7 +108,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       chef.json = {
         nginx: {
           docroot: {
-            owner: "vagrant", group: "vagrant", path: "/var/www/application/current/app/webroot"
+            owner: "vagrant", 
+            group: "vagrant", 
+            path: "/var/www/application/current/app/webroot",
+            force_create: true
           },
           fastcgi_params: {
             CAKE_ENV: "production"

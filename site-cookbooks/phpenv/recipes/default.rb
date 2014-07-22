@@ -36,11 +36,6 @@ link "/etc/nginx/sites-enabled/#{node['nginx']['site']['template']}" do
   to "/etc/nginx/sites-available/#{node['nginx']['site']['template']}"
 end
 
-hostsfile_entry '127.0.0.1' do
-  hostname  'test.localhost'
-  action    :append
-end
-
 template "/etc/nginx/sites-available/default" do
   source "default.erb"
   owner "root"

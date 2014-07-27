@@ -1,12 +1,4 @@
-#
-# Cookbook Name:: jenkins
-# Recipe:: default
-#
-# Copyright 2014, Ryutaro YOSHIBA
-#
-# This software is released under the MIT License.
-# http://opensource.org/licenses/mit-license.php
-
+# プラグインのインストール
 remote_file "/var/lib/jenkins/jenkins-cli.jar" do
   source "http://localhost:8080/jnlpJars/jenkins-cli.jar"
   retries 30
@@ -18,7 +10,7 @@ execute 'get-update-json'  do
   action :run
 end
 
-node['jenkins']['plugins'].each do |plugin_name|
+%w{git checkstyle cloverphp dry htmlpublisher jdepend plot pmd violations xunit phing}.each do |plugin_name|
   e = execute "sudo /usr/bin/java -jar /var/lib/jenkins/jenkins-cli.jar -s http://localhost:8080 install-plugin ".concat(plugin_name) do
     action :run
   end

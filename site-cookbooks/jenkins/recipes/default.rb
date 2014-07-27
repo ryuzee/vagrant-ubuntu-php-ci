@@ -2,11 +2,11 @@
 # Cookbook Name:: jenkins
 # Recipe:: default
 #
-# Copyright 2014, Ryutaro YOSHIBA
+# Copyright 2014, YOUR_COMPANY_NAME
 #
-# This software is released under the MIT License.
-# http://opensource.org/licenses/mit-license.php
-
+# All rights reserved - Do Not Redistribute
+#
+# Jenkins本体のインストール
 apt_repository "jenkins" do
   uri "http://pkg.jenkins-ci.org/debian binary/"
   key "http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key"

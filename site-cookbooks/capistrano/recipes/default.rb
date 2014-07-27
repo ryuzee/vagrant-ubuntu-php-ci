@@ -2,11 +2,10 @@
 # Cookbook Name:: capistrano
 # Recipe:: default
 #
-# Copyright 2014, Ryutaro YOSHIBA
+# Copyright 2014, YOUR_COMPANY_NAME
 #
-# This software is released under the MIT License.
-# http://opensource.org/licenses/mit-license.php
-
+# All rights reserved - Do Not Redistribute
+#
 package "ruby2.0" do
   action :install
 end

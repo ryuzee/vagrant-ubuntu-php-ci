@@ -1,4 +1,7 @@
 source 'https://rubygems.org'
+    
+    gem 'chef'
+    gem 'knife-solo'
+    gem 'hashie', '>= 2.0.2', '< 3.0.0'
+    gem 'berkshelf', '~> 3.0.0'
 
-gem 'berkshelf', '~> 3.0.0'
-gem 'hashie', '= 2.1.1'

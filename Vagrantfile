@@ -5,11 +5,7 @@
 VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  if Vagrant.has_plugin?("vagrant-cachier")
-    config.cache.scope = :box
-  end
-
-  # 1つめの仮想マシン
+  # 1つめの仮想サーバ
   config.vm.define :develop do |develop|
     develop.omnibus.chef_version = :latest
     develop.vm.hostname = "develop"
@@ -17,30 +13,30 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     develop.vm.box_url = "http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_ubuntu-14.04_chef-provisionerless.box"
     develop.vm.network :private_network, ip: "192.168.33.10"
 
-    # Vagrantfileがあるディレクトリと同じディレクトリのapplicationディレクトリをVagrantと共有
-    # このディレクトリを下記でNginxのドキュメントルートに指定
+    # 以下を追加
+    # Vagrantfileがあるディレクトリと同じディレクトリのapplicationディレクトリをVagrantと共有します
+    # 先にapplicationディレクトリを作成しておいてください。
     develop.vm.synced_folder "application", "/var/www/application/current",
       id: "vagrant-root", :nfs => false,
       :owner => "vagrant",
       :group => "www-data",
       :mount_options => ["dmode=775,fmode=775"]
-
+    # 追加ここまで
+    # 以下のプロビジョニングの設定を追加
     develop.vm.provision :chef_solo do |chef|
       chef.log_level = "debug"
       chef.cookbooks_path = "./cookbooks"
       chef.json = {
         nginx: {
           docroot: {
-            owner: "vagrant", 
-            group: "vagrant", 
-            path: "/var/www/application/current/app/webroot",
-            force_create: true
+            owner: "vagrant", group: "vagrant", path: "/var/www/application/current/app/webroot"
           },
-          fastcgi_params: {
-            CAKE_ENV: "development"
+          default: { 
+            fastcgi_params: {  CAKE_ENV: "development" }
           },
-          site: {
-            template: "development"
+          test: {
+            available: true,
+            fastcgi_params: {  CAKE_ENV: "test" }
           }
         }
       }
@@ -54,30 +50,28 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
   end
 
-  # 2つめの仮想マシン
+  # 2つめの仮想サーバ
   config.vm.define :ci do |ci|
     ci.omnibus.chef_version = :latest
     ci.vm.hostname = "ci"
     ci.vm.box = "opscode-ubuntu-14.04"
     ci.vm.box_url = "http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_ubuntu-14.04_chef-provisionerless.box"
     ci.vm.network :private_network, ip: "192.168.33.100"
-
     ci.vm.provision :chef_solo do |chef|
       chef.log_level = "debug"
       chef.cookbooks_path = "./cookbooks"
       chef.json = {
         nginx: {
           docroot: {
-            owner: "jenkins", 
-            group: "jenkins", 
             path: "/var/lib/jenkins/jobs/blogapp/workspace/app/webroot",
             force_create: false
           },
-          fastcgi_params: {
-            CAKE_ENV: "ci"
+          default: { 
+            fastcgi_params: {  CAKE_ENV: "development" }
           },
-          site: {
-            template: "ci"
+          test: {
+            available: true,
+            fastcgi_params: {  CAKE_ENV: "ci" }
           }
         }
       }
@@ -86,21 +80,20 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         recipe[phpenv::default]
         recipe[phpenv::composer]
         recipe[phpenv::develop]
+        recipe[capistrano]
         recipe[jenkins::default]
         recipe[jenkins::plugin]
-        recipe[capistrano]
       ]
     end
   end
 
-  # 3つめの仮想マシン
+  # 3つめの仮想サーバ
   config.vm.define :deploy do |deploy|
     deploy.omnibus.chef_version = :latest
     deploy.vm.hostname = "deploy"
     deploy.vm.box = "opscode-ubuntu-14.04"
     deploy.vm.box_url = "http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_ubuntu-14.04_chef-provisionerless.box"
     deploy.vm.network :private_network, ip: "192.168.33.200"
-    deploy.vm.network "forwarded_port", guest: 80, host: 8882 
 
     deploy.vm.provision :chef_solo do |chef|
       chef.log_level = "debug"
@@ -110,14 +103,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
           docroot: {
             owner: "vagrant", 
             group: "vagrant", 
-            path: "/var/www/application/current/app/webroot",
-            force_create: true
+            path: "/var/www/application/current/app/webroot"
           },
-          fastcgi_params: {
-            CAKE_ENV: "production"
-          },
-          site: {
-            template: "production"
+          default: { 
+            fastcgi_params: {  CAKE_ENV: "production" }
           }
         }
       }

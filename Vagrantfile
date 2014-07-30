@@ -103,7 +103,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
           docroot: {
             owner: "vagrant", 
             group: "vagrant", 
-            path: "/var/www/application/current/app/webroot"
+            path: "/var/www/application/current/app/webroot",
+            force_create: false
           },
           default: { 
             fastcgi_params: {  CAKE_ENV: "production" }

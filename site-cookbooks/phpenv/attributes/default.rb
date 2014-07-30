@@ -14,3 +14,6 @@ default['nginx']['test']['available'] = false
 default['nginx']['test']['fastcgi_params'] = []
 # MySQLのルートパスワード
 default['mysql']['root_password'] = 'password'
+
+default['php']['fpm']['pool']['user'] = 'www-data'
+default['php']['fpm']['pool']['group'] = 'www-data'

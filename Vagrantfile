@@ -108,6 +108,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
           default: { 
             fastcgi_params: {  CAKE_ENV: "production" }
           }
+        },
+        php: {
+          fpm: {
+            pool: {
+              group: "vagrant"
+            }
+          }
         }
       }
       chef.run_list = %w[

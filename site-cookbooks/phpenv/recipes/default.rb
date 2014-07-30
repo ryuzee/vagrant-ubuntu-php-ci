@@ -24,6 +24,15 @@ service "apache2" do
   only_if "dpkg -l | grep apache2"
 end
 
+# php-fpmの設定ファイルを作成
+template "/etc/php5/fpm/pool.d/www.conf" do
+  source "www.conf.erb"
+  owner "root"
+  group "root"
+  mode 0644
+  action :create
+end
+
 # Nginx用の設定ファイルをテンプレートから作成する
 template "/etc/nginx/sites-available/test" do
   source "test.erb"

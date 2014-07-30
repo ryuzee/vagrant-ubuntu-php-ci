@@ -5,7 +5,7 @@ default['nginx']['docroot']['group'] = 'root'
 # Nginxのドキュメントルートのパス
 default['nginx']['docroot']['path'] = "/usr/share/nginx/html"
 # Nginxのドキュメントルートが存在しないときに作成するかどうか
-default['nginx']['docroot']['force_create'] = true
+default['nginx']['docroot']['force_create'] = false
 # Nginxのdefaultサイト設定に引き渡すパラメータ
 default['nginx']['default']['fastcgi_params'] = []
 # Nginxでテスト用のVirtualHostを使うかどうか
